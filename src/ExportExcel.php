@@ -64,12 +64,17 @@ class ExportExcel {
     public function write()
     {
         $this->createTableHeader();
-        dd(1);
+        $this->createTable();
     }
 
     private function createTableHeader()
     {
        $this->createSheetData(1);
+    }
+
+    private function createTable()
+    {
+
     }
 
     private function createSheetData($sheetNumber)
