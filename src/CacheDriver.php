@@ -10,13 +10,13 @@ class CacheDriver {
     {
         switch ($config['name']) {
             case 'apc':
-                $driver = Apc::getInstance();
+                $driver = Apc::getInstance()->getCache();
                 break;
             case 'redis':
-                $driver = Redis::getInstance($config);
+                $driver = Redis::getInstance($config)->getCache();
                 break;
             case 'memcached':
-                $driver = Memcached::getInstance($config);
+                $driver = Memcached::getInstance($config)->getCache();
                 break;
             default:
                 $driver = '';

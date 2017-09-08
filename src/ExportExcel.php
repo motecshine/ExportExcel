@@ -11,7 +11,8 @@ class ExportExcel {
     public function __construct($config)
     {
         $this->config = $config;
-        $this->cacheDriver = new CacheDriver($config['cache_driver']);
+        $this->cacheDriver = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
+
         if (! empty($this->cacheDriver)) {
             Settings::setCache($this->cacheDriver);
         }

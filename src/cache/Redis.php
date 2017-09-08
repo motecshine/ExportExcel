@@ -12,7 +12,8 @@ class Redis implements CacheContract {
     private function __construct($config)
     {
         $client = new \Redis();
-        $client->connect($this->config['server'], $this->config['server']['port']);
+        $this->config = $config;
+        $client->connect($this->config['server'], $this->config['port']);
         $pool = new RedisCachePool($client);
         $this->simpleCache = new SimpleCacheBridge($pool);
     }
