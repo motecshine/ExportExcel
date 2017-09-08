@@ -38,6 +38,7 @@ class ExportExcel {
         'Y',
         'Z'
     ];
+
     public function __construct($config, array $data)
     {
         if (empty($config)) {
@@ -62,12 +63,11 @@ class ExportExcel {
 
     public function write()
     {
-        // 创建Table Header
-        $this->createTableHead();
+        $this->createTableHeader();
         dd(1);
     }
 
-    private function createTableHead()
+    private function createTableHeader()
     {
        $this->createSheetData(1);
     }
