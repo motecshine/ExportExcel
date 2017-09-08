@@ -101,6 +101,7 @@ class ExportExcel {
     {
         return $this->char[$number] . $sheetNumber;
     }
+
     private function outWrite() {
         $writer = new Xlsx($this->spreadsSheet);
         $writer->save($this->buildDownloadFileName());
