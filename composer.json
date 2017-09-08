@@ -1,7 +1,7 @@
 {
     "name": "irain/export-excel",
     "description": "Simple & Faster Export Excel",
-    "type": "Irain Library",
+    "type": "Library",
     "license": "MIT",
     "authors": [
         {
