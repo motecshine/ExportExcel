@@ -1,0 +1,26 @@
+{
+    "name": "irain/export-excel",
+    "description": "Simple & Faster Export Excel",
+    "type": "Irain Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "motecshine",
+            "email": "shinemotec@gmail.com"
+        }
+    ],
+    "require": {
+        "cache/simple-cache-bridge": "^1.0",
+        "cache/redis-adapter": "^1.0",
+        "cache/apcu-adapter": "^1.0",
+        "cache/memcache-adapter": "^1.0"
+    },
+    "require-dev": {
+        "phpoffice/phpspreadsheet" : "^1.0.0-beta"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}
