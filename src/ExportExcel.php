@@ -63,29 +63,33 @@ class ExportExcel {
 
     public function write()
     {
-        $this->createTableHeader();
-        $this->createTable();
+        $this->createTableHeader()->createTable();
     }
 
     private function createTableHeader()
     {
-       $this->createSheetData(1);
+       $this->createSheetData($this->config['table_header'], 1);
+       return $this;
     }
 
     private function createTable()
     {
-
+        $sheetNumber = 2;
+        foreach ($this->data as $item) {
+            $this->createSheetData($item. $sheetNumber);
+            $sheetNumber++ ;
+        }
+        return $this;
     }
 
-    private function createSheetData($sheetNumber)
+    private function createSheetData($data, $sheetNumber)
     {
         $number = 0;
-        foreach ($this->config['table_header'] as $value) {
+        foreach ($data as $value) {
             $this->spreadsSheet->getActiveSheet()->setCellValue($this->numberToString($number, $sheetNumber), $value);
             $number++;
         }
-        $writer = new Xlsx($this->spreadsSheet);
-        $writer->save($this->buildDownloadFileName());
+        return $this;
     }
 
     private function buildDownloadFileName($ext = '.xls')
@@ -96,6 +100,10 @@ class ExportExcel {
     private function numberToString($number, $sheetNumber)
     {
         return $this->char[$number] . $sheetNumber;
+    }
+    private function outWrite() {
+        $writer = new Xlsx($this->spreadsSheet);
+        $writer->save($this->buildDownloadFileName());
     }
 
 }
