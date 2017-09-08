@@ -85,8 +85,9 @@ class ExportExcel {
     private function createSheetData($data, $sheetNumber)
     {
         $number = 0;
-        foreach ($data as $value) {
-            $this->spreadsSheet->getActiveSheet()->setCellValue($this->numberToString($number, $sheetNumber), $value);
+        foreach ($data as $key => $value) {
+            $this->spreadsSheet->getActiveSheet()->setCellValue($this->numberToString($number, $sheetNumber),
+                $value);
             $number++;
         }
         return $this;
