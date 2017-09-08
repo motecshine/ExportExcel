@@ -63,7 +63,7 @@ class ExportExcel {
 
     public function write()
     {
-        $this->createTableHeader()->createTable();
+        $this->createTableHeader()->createTable()->outWrite();
     }
 
     private function createTableHeader()
@@ -76,7 +76,7 @@ class ExportExcel {
     {
         $sheetNumber = 2;
         foreach ($this->data as $item) {
-            $this->createSheetData($item. $sheetNumber);
+            $this->createSheetData($item, $sheetNumber);
             $sheetNumber++ ;
         }
         return $this;
