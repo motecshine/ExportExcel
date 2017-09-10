@@ -1,19 +1,48 @@
 <?php
+
 namespace Irain\ExportExcel;
 
 use Irain\ExportExcel\Writer\ExcelWriter;
 
 class Writer
 {
+
     private $config;
+
     private $data;
+
     private $writer;
-    public function __construct($config, array $data)
+
+    /**
+     * Writer constructor.
+     */
+    public function __construct() {}
+
+    /**
+     * set config
+     *
+     * @param array $config
+     */
+    public function setConfig($config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * set data
+     *
+     * @param array $data
+     */
+    public function setData($data)
+    {
         $this->data = $data;
     }
 
+    /**
+     * build and out stream
+     *
+     * @return mixed
+     */
     public function buildAndOutStream()
     {
         switch ($this->config['writer']) {
@@ -33,6 +62,13 @@ class Writer
         return $this->config['path'] ? $this->config['path'] . '/' : './';
     }
 
+    /**
+     * build download file name
+     *
+     * @param string $ext
+     *
+     * @return string
+     */
     private function buildDownloadFileName($ext = '.xls')
     {
         return $this->path() . $this->config['name'] . $ext;

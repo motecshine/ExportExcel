@@ -1,28 +1,35 @@
 <?php
+
 namespace Irain\ExportExcel\Cache;
 
 use Irain\ExportExcel\Contract\CacheContract;
 use Cache\Bridge\SimpleCache\SimpleCacheBridge;
 use Cache\Adapter\Redis\RedisCachePool;
 
-class Redis implements CacheContract {
+class Redis implements CacheContract
+{
+
     static public $instance;
+
     private $config;
+
     private $simpleCache;
+
     private function __construct($config)
     {
-        $client = new \Redis();
+        $client       = new \Redis();
         $this->config = $config;
         $client->connect($this->config['server'], $this->config['port']);
-        $pool = new RedisCachePool($client);
+        $pool              = new RedisCachePool($client);
         $this->simpleCache = new SimpleCacheBridge($pool);
     }
 
-    static  public function getInstance($config)
+    static public function getInstance($config)
     {
-        if (! self::$instance) {
+        if (!self::$instance) {
             self::$instance = new self($config);
         }
+
         return self::$instance;
     }
 
