@@ -6,6 +6,14 @@ use Irain\ExportExcel\Cache\Memcached;
 use Irain\ExportExcel\Cache\Redis;
 
 class CacheDriver {
+
+    /**
+     * set cache driver
+     *
+     * @param $config
+     *
+     * @return \Cache\Bridge\SimpleCache\SimpleCacheBridge|string
+     */
     public function setCacheDriver($config)
     {
         switch ($config['name']) {
