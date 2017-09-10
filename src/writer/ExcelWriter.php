@@ -85,7 +85,8 @@ class ExcelWriter implements  WriterContract{
         return $this->char[$number] . $sheetNumber;
     }
 
-    public function save($path) {
+    public function save($path)
+    {
         try {
             $writer = new Xlsx($this->spreadsSheet);
             $writer->save($path);

@@ -2,7 +2,6 @@
 namespace Irain\ExportExcel;
 
 use PhpOffice\PhpSpreadsheet\Settings;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class Export {
     private $config;
@@ -10,29 +9,39 @@ class Export {
     private $cacheDriver;
     private $writer;
 
-    public function __construct($config, array $data)
+    public function __construct($config)
     {
         if (empty($config)) {
-            new \Exception('Config Can Not Empty.');
+            throw new \Exception('Config Can Not Empty.');
         }
-        if (empty($data)) {
-            new \Exception('Sheet Data Can Not Empty.');
-        }
-
         $this->config = $config;
-        $this->data = $data;
 
-        $this->spreadsSheet = new Spreadsheet;
-        $this->cacheDriver = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
+    }
+
+    public function output()
+    {
+        if (! empty($this->config['cache_driver'])) {
+            $this->configCache();
+        }
+        $this->writer = new Writer($this->config, $this->data);
+        return $this->writer->buildAndOutStream();
+    }
+
+    public function data($data)
+    {
+        if (empty($data)) {
+            throw new \Exception('Sheet Data Can Not Empty.');
+        }
+        $this->data = $data;
+        return $this;
+    }
+
+    public function configCache()
+    {
+        $this->cacheDriver = (new CacheDriver)->setCacheDriver($this->config['cache_driver']);
         if (! empty($this->cacheDriver)) {
             Settings::setCache($this->cacheDriver);
         }
-        $this->writer = new Writer($this->config, $this->data);
-    }
-
-    public function buildAndOutStream()
-    {
-        return $this->writer->buildAndOutStream();
     }
 
 }

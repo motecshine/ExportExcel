@@ -11,8 +11,7 @@
     "phpoffice/phpspreadsheet" : "~1.0.0beta"
     
 # Example 
-    
-    use Irain\ExportExcel\Export;
+```php
     $conf = [
         'cache_driver' => [
             'name' => 'redis',
@@ -20,16 +19,18 @@
             'port' => '6379'
         ],
         'table_header' => [
-           'name', 'age'
+            'name', 'age'
         ],
         'name' => 'export_file_name' . date('Y-m-d H:i:s', time()),
-        'path' => '/tmp',
+        'path' => DOWNLOAD_PATH,
         'writer' => 'excel'  // if empty default writer is `excel`
     ];
     $excelData = [
         ['green', '1']
     ];
-    (new Export($conf, $excelData))->buildAndOutStream();
+    (new Export($conf, $excelData))->data($excelData)->output();
+
+```
     
 # Special Thanks
 # License
