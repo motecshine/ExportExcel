@@ -3,13 +3,14 @@ namespace Irain\ExportExcel;
 
 use PhpOffice\PhpSpreadsheet\Settings;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use Irain\ExportExcel\Contract\WriterContract;
+use Irain\ExportExcel\Writer;
 
 
 class ExportExcel {
     private $config;
     private $data;
     private $cacheDriver;
+    private $writer;
 
     public function __construct($config, array $data)
     {
@@ -28,7 +29,12 @@ class ExportExcel {
         if (! empty($this->cacheDriver)) {
             Settings::setCache($this->cacheDriver);
         }
+        $this->writer = new Writer($this->config, $this->data);
+    }
 
+    public function buildAndOutStream()
+    {
+        return $this->writer->buildAndOutStream();
     }
 
 }

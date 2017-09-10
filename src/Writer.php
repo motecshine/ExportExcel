@@ -10,23 +10,21 @@ class Writer
     private $writer;
     public function __construct($config, array $data)
     {
-        if (empty($config['writer'])) {
-            new \Exception('Config Can Not Empty.');
-        }
-        if (empty($data)) {
-            new \Exception('Sheet Data Can Not Empty.');
-        }
         $this->config = $config;
         $this->data = $data;
     }
 
-    public function buildOutStream()
+    public function buildAndOutStream()
     {
         switch ($this->config['writer']) {
             case 'excel':
                 $this->writer = new ExcelWriter($this->config, $this->data);
                 break;
+            /* Default writer driver is excel */
+            default :
+                $this->writer = new ExcelWriter($this->config, $this->data);
         }
+
         return $this->writer->buildAndOutStream($this->buildDownloadFileName());
     }
 
@@ -39,6 +37,4 @@ class Writer
     {
         return $this->path() . $this->config['name'] . $ext;
     }
-
-
 }

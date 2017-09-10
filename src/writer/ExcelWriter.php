@@ -2,6 +2,7 @@
 namespace Irain\ExportExcel\Writer;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Irain\ExportExcel\Contract\WriterContract;
 
@@ -47,7 +48,7 @@ class ExcelWriter implements  WriterContract{
 
     public function buildAndOutStream($path)
     {
-        $this->buildTableHeader()->buildTable()->save($path);
+        return $this->buildTableHeader()->buildTable()->save($path);
     }
 
     public function buildTableHeader()
@@ -85,9 +86,18 @@ class ExcelWriter implements  WriterContract{
     }
 
     public function save($path) {
-        $writer = new Xlsx($this->spreadsSheet);
-        $writer->save($path);
+        try {
+            $writer = new Xlsx($this->spreadsSheet);
+            $writer->save($path);
+            return $this->getPath($path);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
+    private function getPath($path)
+    {
+        return $path;
+    }
 }
 
