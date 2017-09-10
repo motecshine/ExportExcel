@@ -13,23 +13,29 @@
 # Example 
     
     use Irain\ExportExcel\Export;
-    $conf = [
+    
+    $config = [
         'cache_driver' => [
-            'name' => 'redis',
+            'name'   => 'redis',
             'server' => '127.0.0.1',
-            'port' => '6379'
+            'port'   => '6379',
         ],
-        'table_header' => [
-           'name', 'age'
-        ],
-        'name' => 'export_file_name' . date('Y-m-d H:i:s', time()),
-        'path' => '/tmp',
-        'writer' => 'excel'  // if empty default writer is `excel`
+        'path'         => '/tmp',
+        'writer'       => 'excel', // if empty default writer is `excel`
     ];
+    
     $excelData = [
         ['green', '1']
     ];
-    (new Export($conf, $excelData))->buildAndOutStream();
+    
+    $fileName = 'export_file_name' . date('Y-m-d H:i:s', time());
+ 
+    $export   = new Export($config);
+    
+    $export->fileName($fileName)
+        ->header(['name', 'age'])
+        ->data($data)
+        ->output();
     
 # Special Thanks
 # License

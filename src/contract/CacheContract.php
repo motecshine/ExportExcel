@@ -1,6 +1,9 @@
 <?php
+
 namespace Irain\ExportExcel\Contract;
 
-interface CacheContract {
+interface CacheContract
+{
+
     public function getCache();
 }

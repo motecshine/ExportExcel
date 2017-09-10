@@ -1,4 +1,5 @@
 <?php
+
 namespace Irain\ExportExcel\Writer;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -6,10 +7,15 @@ use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Irain\ExportExcel\Contract\WriterContract;
 
-class ExcelWriter implements  WriterContract{
+class ExcelWriter implements WriterContract
+{
+
     private $config;
+
     private $data;
+
     private $spreadsSheet;
+
     private $char = [
         'A',
         'B',
@@ -36,24 +42,26 @@ class ExcelWriter implements  WriterContract{
         'W',
         'X',
         'Y',
-        'Z'
+        'Z',
     ];
 
     public function __construct($config, array $data)
     {
-        $this->config = $config;
-        $this->data = $data;
+        $this->config       = $config;
+        $this->data         = $data;
         $this->spreadsSheet = new Spreadsheet;
     }
 
     public function buildAndOutStream($path)
     {
-        return $this->buildTableHeader()->buildTable()->save($path);
+        return $this->buildTableHeader()
+                    ->buildTable()
+                    ->save($path);
     }
 
     public function buildTableHeader()
     {
-        if (! empty($this->config['table_header'])) {
+        if (!empty($this->config['table_header'])) {
             $this->createSheetData($this->config['table_header'], 1);
         }
         return $this;
@@ -64,7 +72,7 @@ class ExcelWriter implements  WriterContract{
         $sheetNumber = 2;
         foreach ($this->data as $item) {
             $this->createSheetData($item, $sheetNumber);
-            $sheetNumber++ ;
+            $sheetNumber++;
         }
         return $this;
     }
@@ -73,8 +81,9 @@ class ExcelWriter implements  WriterContract{
     {
         $number = 0;
         foreach ($data as $key => $value) {
-            $this->spreadsSheet->getActiveSheet()->setCellValue($this->numberToString($number, $sheetNumber),
-                $value);
+            $this->spreadsSheet
+                ->getActiveSheet()
+                ->setCellValue($this->numberToString($number, $sheetNumber), $value);
             $number++;
         }
         return $this;
@@ -85,7 +94,8 @@ class ExcelWriter implements  WriterContract{
         return $this->char[$number] . $sheetNumber;
     }
 
-    public function save($path) {
+    public function save($path)
+    {
         try {
             $writer = new Xlsx($this->spreadsSheet);
             $writer->save($path);
