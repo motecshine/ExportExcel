@@ -1,7 +1,7 @@
 # Export Excel
     `Export Excel`  is a simple & faster exports table tool.
 # How To Install
-    composer install irain/export-excel
+    composer require irain/export-excel
 # Dependency
 
     "cache/simple-cache-bridge": "^1.0",
