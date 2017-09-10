@@ -20,7 +20,7 @@ class Redis implements CacheContract {
 
     static  public function getInstance($config)
     {
-        if (!self::$instance) {
+        if (! self::$instance) {
             self::$instance = new self($config);
         }
         return self::$instance;

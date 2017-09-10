@@ -3,10 +3,8 @@ namespace Irain\ExportExcel;
 
 use PhpOffice\PhpSpreadsheet\Settings;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use Irain\ExportExcel\Writer;
 
-
-class ExportExcel {
+class Export {
     private $config;
     private $data;
     private $cacheDriver;
