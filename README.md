@@ -32,6 +32,7 @@
 
 ```
     
-# Special Thanks
+# Contributors
+
 # License
 MIT
