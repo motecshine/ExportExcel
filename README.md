@@ -28,7 +28,7 @@
     $excelData = [
         ['green', '1']
     ];
-    (new Export($conf, $excelData))->data($excelData)->output();
+    (new Export($conf))->data($excelData)->output();
 
 ```
     
