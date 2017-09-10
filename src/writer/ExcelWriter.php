@@ -45,23 +45,20 @@ class ExcelWriter implements  WriterContract{
         $this->spreadsSheet = new Spreadsheet;
     }
 
-    public function downloadPath()
+    public function buildAndOutStream($path)
     {
-        return $this->config['path'] ? $this->config['path'] . '/' : './';
+        $this->buildTableHeader()->buildTable()->save($path);
     }
 
-    public function buildAndOutStream()
+    public function buildTableHeader()
     {
-        $this->createTableHeader()->createTable()->save();
-    }
-
-    private function createTableHeader()
-    {
-        $this->createSheetData($this->config['table_header'], 1);
+        if (! empty($this->config['table_header'])) {
+            $this->createSheetData($this->config['table_header'], 1);
+        }
         return $this;
     }
 
-    private function createTable()
+    public function buildTable()
     {
         $sheetNumber = 2;
         foreach ($this->data as $item) {

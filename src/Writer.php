@@ -1,10 +1,9 @@
 <?php
 namespace Irain\ExportExcel;
 
-use Irain\ExportExcel\Contract\WriterContract;
 use Irain\ExportExcel\Writer\ExcelWriter;
 
-class Writer implements WriterContract
+class Writer
 {
     private $config;
     private $data;
@@ -21,36 +20,25 @@ class Writer implements WriterContract
         $this->data = $data;
     }
 
-    public function getWriter()
+    public function buildOutStream()
     {
         switch ($this->config['writer']) {
             case 'excel':
                 $this->writer = new ExcelWriter($this->config, $this->data);
                 break;
         }
+        return $this->writer->buildAndOutStream($this->buildDownloadFileName());
     }
 
-    public function save($path)
-    {
-        // TODO: Implement save() method.
-    }
-
-    public function buildAndOutStream()
-    {
-        // TODO: Implement buildAndOutStream() method.
-    }
-
-    public function downloadPath()
+    public function path()
     {
         return $this->config['path'] ? $this->config['path'] . '/' : './';
     }
 
-    public function write()
-    {
-    }
-
     private function buildDownloadFileName($ext = '.xls')
     {
-        return $this->downloadPath() . $this->config['name'] . $ext;
+        return $this->path() . $this->config['name'] . $ext;
     }
+
+
 }
