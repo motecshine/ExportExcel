@@ -25,6 +25,7 @@ class Writer
      * set config
      *
      * @param array $config
+     * @return Writer $this
      */
     public function setConfig($config)
     {
@@ -32,6 +33,7 @@ class Writer
             throw new RuntimeException('Config Can Not Empty.');
         }
         $this->config = $config;
+        return $this;
     }
 
     /**
@@ -44,6 +46,12 @@ class Writer
         $this->data = $data;
     }
 
+    /**
+     *  get Writer
+     *
+     * @return ExcelWriter
+     * @throws \Exception
+     */
     public function getWriter()
     {
         switch ($this->config['writer']) {
@@ -74,10 +82,15 @@ class Writer
         return $this;
     }
 
-
+    /**
+     * set resource
+     *
+     * @return mixed
+     * @throws \Exception
+     */
     public function resourceDataToArray()
     {
-        return $this->getWriter()->resourceDataToArray($this->resource);
+        return $this->getWriter()->setResource($this->resource)->resourceDataToArray();
     }
 
     /**

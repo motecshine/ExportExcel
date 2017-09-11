@@ -79,9 +79,13 @@ class ExcelWriter implements WriterContract
         return $this;
     }
 
-    public function resourceDataToArray($resource)
+    /**
+     * set resource data
+     * @return array
+     */
+    public function resourceDataToArray()
     {
-
+        return [];
     }
 
     /**

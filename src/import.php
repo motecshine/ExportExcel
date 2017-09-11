@@ -87,13 +87,15 @@ class Import
      *
      * @return $this
      * @throws \Exception
+     *
+     * @return mixed
      */
-    public function toArray()
+    public function resourceDataToArray()
     {
-        $this->writer->setConfig($this->config);
-        $this->writer->setData($this->resource);
-
-        return $this->writer->resourceDataToArray();
+        return $this->writer
+            ->setConfig($this->config)
+            ->setResource($this->resource)
+            ->resourceDataToArray();
     }
 
 }
