@@ -33,7 +33,7 @@ class Export
         $this->spreadsSheet = new Spreadsheet;
         $this->writer       = new Writer;
 
-        if(!empty($this->config['cache_driver'])) {
+        if (!empty($this->config['cache_driver'])) {
             $this->cacheDriver  = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
         }
 

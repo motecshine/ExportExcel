@@ -18,6 +18,7 @@ class Memcached implements CacheContract
     private function __construct($config)
     {
         $client = new \Memcache();
+        $this->config = $config;
         $client->connect($this->config['server'], $this->config['port']);
         $pool              = new MemcacheCachePool($client);
         $this->simpleCache = new SimpleCacheBridge($pool);
@@ -28,7 +29,6 @@ class Memcached implements CacheContract
         if (!self::$instance) {
             self::$instance = new self($config);
         }
-
         return self::$instance;
     }
 
