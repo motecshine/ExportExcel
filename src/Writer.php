@@ -3,6 +3,7 @@
 namespace Irain\ExportExcel;
 
 use Irain\ExportExcel\Writer\ExcelWriter;
+use RuntimeException;
 
 class Writer
 {
@@ -25,6 +26,9 @@ class Writer
      */
     public function setConfig($config)
     {
+        if (empty($config)) {
+            throw new RuntimeException('Config Can Not Empty.');
+        }
         $this->config = $config;
     }
 

@@ -8,10 +8,11 @@ use RuntimeException;
 
 class ExportTest extends PHPUnitTestCase
 {
-    public function testExportWithoutDefaultSetting()
+    public function testExportWithoutConfig()
     {
-        new Export([]);
+        $export = new Export([]);
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Config Can Not Empty.');
+        $export->setConfig([]);
     }
 }

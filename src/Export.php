@@ -4,6 +4,7 @@ namespace Irain\ExportExcel;
 
 use PhpOffice\PhpSpreadsheet\Settings;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use RuntimeException;
 
 class Export
 {
@@ -21,17 +22,14 @@ class Export
      *
      * @param array $config
      *
-     * @throws \Exception
      */
     public function __construct($config)
     {
-        if (empty($config)) {
-            throw new \Exception('Config Can Not Empty.');
+        if (!empty($config)) {
+            $this->setConfig($config);
         }
-
-        $this->config       = $config;
         $this->spreadsSheet = new Spreadsheet;
-        $this->writer       = new Writer();
+        $this->writer       = new Writer;
 
         if(!empty($this->config['cache_driver'])) {
             $this->cacheDriver  = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
@@ -40,6 +38,20 @@ class Export
         if (!empty($this->cacheDriver)) {
             Settings::setCache($this->cacheDriver);
         }
+    }
+
+
+    /**
+     * set config
+     *
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        if (empty($config)) {
+            throw new RuntimeException('Config Can Not Empty.');
+        }
+        $this->config = $config;
     }
 
     /**
