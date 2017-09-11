@@ -15,4 +15,20 @@ class ExportTest extends PHPUnitTestCase
         $this->expectExceptionMessage('Config Can Not Empty.');
         $export->setConfig([]);
     }
+
+    public function testExportWithoutHeader()
+    {
+        $export = new Export([]);
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Table header Can Not Empty.');
+        $export->header([]);
+    }
+
+    public function testExportWithoutFileName()
+    {
+        $export = new Export([]);
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('File name Can Not Empty.');
+        $export->fileName([]);
+    }
 }

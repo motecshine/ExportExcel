@@ -40,7 +40,6 @@ class Export
         }
     }
 
-
     /**
      * set config
      *
@@ -65,7 +64,7 @@ class Export
     public function header($header)
     {
         if (empty($header)) {
-            throw new \Exception('Table header Can Not Empty.');
+            throw new RuntimeException('Table header Can Not Empty.');
         }
 
         $this->config['table_header'] = $header;
@@ -84,7 +83,7 @@ class Export
     public function fileName($name)
     {
         if (empty($name)) {
-            throw new \Exception('File name Can Not Empty.');
+            throw new RuntimeException('File name Can Not Empty.');
         }
 
         $this->config['name'] = $name;
@@ -104,7 +103,7 @@ class Export
     public function data($data)
     {
         if (empty($data)) {
-            throw new \Exception('Sheet Data Can Not Empty.');
+            throw new RuntimeException('Sheet Data Can Not Empty.');
         }
 
         $this->data = $data;
