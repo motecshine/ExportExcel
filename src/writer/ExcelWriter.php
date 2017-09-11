@@ -6,6 +6,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Irain\ExportExcel\Contract\WriterContract;
+use RuntimeException;
 
 class ExcelWriter implements WriterContract
 {
@@ -15,6 +16,8 @@ class ExcelWriter implements WriterContract
     private $data;
 
     private $spreadsSheet;
+
+    private $resource;
 
     private $char = [
         'A',
@@ -48,7 +51,6 @@ class ExcelWriter implements WriterContract
     public function __construct($config, array $data)
     {
         $this->config       = $config;
-        $this->data         = $data;
         $this->spreadsSheet = new Spreadsheet;
     }
 
@@ -74,6 +76,49 @@ class ExcelWriter implements WriterContract
             $this->createSheetData($item, $sheetNumber);
             $sheetNumber++;
         }
+        return $this;
+    }
+
+    /**
+     * set resource data
+     * @return array
+     */
+    public function resourceDataToArray()
+    {
+        return [];
+    }
+
+    /**
+     * set data
+     *
+     * @param array $data
+     * @return ExcelWriter $this
+     */
+    public function setData($data)
+    {
+        if (empty($data)) {
+            throw new RuntimeException('Sheet Data Can Not Empty.');
+        }
+        $this->data = $data;
+        return $this;
+    }
+
+    /**
+     * set resource
+     *
+     * @param $resource
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function setResource($resource)
+    {
+        if (!is_resource($resource)) {
+            throw new \InvalidArgumentException('Param must be resource type.');
+        }
+
+        $this->resource = $resource;
+
         return $this;
     }
 
