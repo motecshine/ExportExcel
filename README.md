@@ -4,6 +4,8 @@
 
 <p align="center">
     <a href="https://packagist.org/packages/irain/export-excel"><img src="https://travis-ci.org/motecshine/ExportExcel.svg?branch=master" alt="Latest Unstable Version"></a>
+    <a href="https://packagist.org/packages/irain/export-excel"><img src="https://scrutinizer-ci.com/g/motecshine/ExportExcel/badges/quality-score.png?b=master" alt="Latest Unstable Version"></a>
+
 </p>
 
 # How To Install

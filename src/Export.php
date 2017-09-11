@@ -15,6 +15,8 @@ class Export
 
     private $cacheDriver;
 
+    private $spreadsSheet;
+
     private $writer;
 
     /**
@@ -36,7 +38,7 @@ class Export
         }
 
         if (!empty($this->cacheDriver)) {
-            Settings::setCache($this->cacheDriver);
+            Settings::setCache(/** @scrutinizer ignore-type */$this->cacheDriver);
         }
     }
 
