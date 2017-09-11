@@ -1,5 +1,11 @@
-# Export Excel
-    `Export Excel`  is a simple & faster exports table tool.
+<h1 align="center">Export Excel</h1>
+
+<p align="center">`Export Excel`  is a simple & faster exports table tool.</p>
+
+<p align="center">
+    <a href="https://packagist.org/packages/irain/export-excel"><img src="https://travis-ci.org/motecshine/ExportExcel.svg?branch=master" alt="Latest Unstable Version"></a>
+</p>
+
 # How To Install
     composer require irain/export-excel
 # Dependency
