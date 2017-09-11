@@ -39,11 +39,13 @@ class Writer
     /**
      * set data
      *
-     * @param array $data
+     * @param  array $data
+     * @return Writer
      */
     public function setData($data)
     {
         $this->data = $data;
+        return $this;
     }
 
     /**

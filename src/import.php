@@ -83,7 +83,7 @@ class Import
     }
 
     /**
-     * set resource file data to array data
+     * resource file data to array data
      *
      * @return $this
      * @throws \Exception

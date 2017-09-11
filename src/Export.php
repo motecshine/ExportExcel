@@ -33,7 +33,7 @@ class Export
         $this->spreadsSheet = new Spreadsheet;
         $this->writer       = new Writer;
 
-        if (!empty($this->config['cache_driver'])) {
+        if(!empty($this->config['cache_driver'])) {
             $this->cacheDriver  = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
         }
 
@@ -109,7 +109,6 @@ class Export
         }
 
         $this->data = $data;
-
         return $this;
     }
 
@@ -120,9 +119,8 @@ class Export
      */
     public function output()
     {
-        $this->writer->setConfig($this->config);
+        $this->writer->getWriter()->setConfig($this->config);
         $this->writer->setData($this->data);
-
         return $this->writer->buildAndOutStream();
     }
 
