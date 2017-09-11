@@ -1,7 +1,6 @@
 <?php
 namespace Irain\ExportExcel\Tests;
 
-use Mockery;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Irain\ExportExcel\Export;
 use RuntimeException;
