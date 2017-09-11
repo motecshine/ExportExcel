@@ -14,6 +14,8 @@ class Writer
 
     private $writer;
 
+    private $resource;
+
     /**
      * Writer constructor.
      */
@@ -42,12 +44,7 @@ class Writer
         $this->data = $data;
     }
 
-    /**
-     * build and out stream
-     *
-     * @return mixed
-     */
-    public function buildAndOutStream()
+    public function getWriter()
     {
         switch ($this->config['writer']) {
             case 'excel' :
@@ -57,8 +54,40 @@ class Writer
             default :
                 $this->writer = new ExcelWriter($this->config, $this->data);
         }
+        return $this->writer;
+    }
 
-        return $this->writer->buildAndOutStream($this->buildDownloadFileName());
+    /**
+     * set resource
+     *
+     * @param $resource
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function setResource($resource)
+    {
+        if (!is_resource($resource)) {
+            throw new \InvalidArgumentException('Param must be resource type.');
+        }
+        $this->resource = $resource;
+        return $this;
+    }
+
+
+    public function resourceDataToArray()
+    {
+        return $this->getWriter()->resourceDataToArray($this->resource);
+    }
+
+    /**
+     * build and out stream
+     *
+     * @return mixed
+     */
+    public function buildAndOutStream()
+    {
+        return $this->getWriter()->buildAndOutStream($this->buildDownloadFileName());
     }
 
     public function path()

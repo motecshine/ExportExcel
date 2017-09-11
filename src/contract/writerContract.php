@@ -12,4 +12,6 @@ interface WriterContract
     public function buildTable();
 
     public function buildTableHeader();
+
+    public function resourceDataToArray($resource);
 }
