@@ -50,7 +50,7 @@ class Writer
     public function buildAndOutStream()
     {
         switch ($this->config['writer']) {
-            case 'excel':
+            case 'excel' :
                 $this->writer = new ExcelWriter($this->config, $this->data);
                 break;
             /* Default writer driver is excel */
