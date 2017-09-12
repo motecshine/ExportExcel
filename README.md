@@ -20,30 +20,32 @@
 # Example 
 
 ## Export
-    use Irain\ExportExcel\Export;  
-    $config = [
-        'cache_driver' => [
-            'name'   => 'redis',
-            'server' => '127.0.0.1',
-            'port'   => '6379',
-        ],
-        'path'         => DOWNLOAD_PATH,
-        'writer'       => 'excel', // if empty default writer is `excel`
-    ];
-
-    $excelData = [
-        ['green', '1']
-    ];
-
-    $fileName = 'export_file_name' . date('Y-m-d H:i:s', time());
-
-    $export   = new Export($config);
-
-    $export->fileName($fileName)
-        ->header(['name', 'age'])
-        ->data($excelData)
-        ->output();
-
+```php 
+     use Irain\ExportExcel\Export;  
+        $config = [
+            'cache_driver' => [
+                'name'   => 'redis',
+                'server' => '127.0.0.1',
+                'port'   => '6379',
+            ],
+            'path'         => DOWNLOAD_PATH,
+            'writer'       => 'excel', // if empty default writer is `excel`
+        ];
+    
+        $excelData = [
+            ['green', '1']
+        ];
+    
+        $fileName = 'export_file_name' . date('Y-m-d H:i:s', time());
+    
+        $export   = new Export($config);
+    
+        $export->fileName($fileName)
+            ->header(['name', 'age'])
+            ->data($excelData)
+            ->output();
+ 
+```
 ## Import
 ```php
     use Irain\ExportExcel\import;  
@@ -53,7 +55,6 @@
                 'server' => '127.0.0.1',
                 'port'   => '6379',
             ],
-            'path'         => DOWNLOAD_PATH,
             'writer'       => 'excel', // if empty default writer is `excel`
         ];
 
