@@ -122,7 +122,6 @@ class Export
     {
         $this->writer->setConfig($this->config);
         $this->writer->setData($this->data);
-
         return $this->writer->buildAndOutStream();
     }
 

@@ -12,11 +12,12 @@ class Writer
 
     private $data;
 
-    private $writer;
+    private $writerDriver;
 
     /**
      * Writer constructor.
      */
+
     public function __construct() {}
 
     /**
@@ -24,6 +25,7 @@ class Writer
      *
      * @param array $config
      */
+
     public function setConfig($config)
     {
         if (empty($config)) {
@@ -43,23 +45,36 @@ class Writer
     }
 
     /**
+     * @return mixed
+     */
+    public function getWriterDriver()
+    {
+        switch ($this->config['writer']) {
+            case 'excel' :
+                $this->writerDriver = new ExcelWriter($this->config, $this->data);
+                break;
+            /* Default writer driver is excel */
+            default :
+                $this->writerDriver = new ExcelWriter($this->config, $this->data);
+        }
+        return $this->writerDriver;
+    }
+
+    /**
      * build and out stream
      *
      * @return mixed
      */
     public function buildAndOutStream()
     {
-        switch ($this->config['writer']) {
-            case 'excel' :
-                $this->writer = new ExcelWriter($this->config, $this->data);
-                break;
-            /* Default writer driver is excel */
-            default :
-                $this->writer = new ExcelWriter($this->config, $this->data);
-        }
-
-        return $this->writer->buildAndOutStream($this->buildDownloadFileName());
+        return $this->getWriterDriver()->buildAndOutStream($this->buildDownloadFileName());
     }
+
+    /**
+     * origin path
+     *
+     * @return mixed
+     */
 
     public function path()
     {
@@ -73,6 +88,7 @@ class Writer
      *
      * @return string
      */
+
     private function buildDownloadFileName($ext = '.xls')
     {
         return $this->path() . $this->config['name'] . $ext;
