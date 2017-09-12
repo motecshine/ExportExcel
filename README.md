@@ -49,19 +49,19 @@
 ## Import
 ```php
     use Irain\ExportExcel\import;  
-     $importConfig = [
-            'cache_driver' => [
-                'name'   => 'redis',
-                'server' => '127.0.0.1',
-                'port'   => '6379',
-            ],
-            'writer'       => 'excel', // if empty default writer is `excel`
-        ];
+    $importConfig = [
+        'cache_driver' => [
+            'name'   => 'redis',
+            'server' => '127.0.0.1',
+            'port'   => '6379',
+        ],
+        'writer'       => 'excel', // if empty default writer is `excel`
+    ];
 
-        $import = new \Irain\ExportExcel\Import($importConfig);
-        $data = $import->setResource('/var/www/html/export_file_name.xls')
-        ->header(['name', 'age'])
-        ->resourceToArray();
+    $import = new \Irain\ExportExcel\Import($importConfig);
+    $data = $import->setResource('/var/www/html/export_file_name.xls')
+    ->header(['name', 'age'])
+    ->resourceToArray();
 ```       
     
 # Contributors
