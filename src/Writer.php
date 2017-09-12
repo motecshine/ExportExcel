@@ -32,6 +32,7 @@ class Writer
             throw new RuntimeException('Config Can Not Empty.');
         }
         $this->config = $config;
+        return $this;
     }
 
     /**
@@ -44,6 +45,38 @@ class Writer
         $this->data = $data;
     }
 
+    /**
+     * Set resouce path
+     *
+     * @param string $resource resource name
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function setResource($resource)
+    {
+         if (empty($resource)) {
+             throw new RuntimeException('Resouce file name can not empty.');
+         }
+         $this->data = $resource;
+         return $this;
+     }
+
+    /**
+     * resource file to array
+     *
+     * @param string $resource resource name
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    public function resourceToArray()
+    {
+        if (!empty($this->data)) {
+            return $this->getWriterDriver()->resourceToArray();
+        }
+    }
+    
     /**
      * @return mixed
      */
@@ -75,7 +108,6 @@ class Writer
      *
      * @return mixed
      */
-
     public function path()
     {
         return $this->config['path'] ? $this->config['path'] . '/' : './';
@@ -88,7 +120,6 @@ class Writer
      *
      * @return string
      */
-
     private function buildDownloadFileName($ext = '.xls')
     {
         return $this->path() . $this->config['name'] . $ext;

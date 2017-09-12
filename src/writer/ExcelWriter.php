@@ -6,6 +6,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Irain\ExportExcel\Contract\WriterContract;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use RuntimeException;
 
 class ExcelWriter implements WriterContract
 {
@@ -45,7 +47,7 @@ class ExcelWriter implements WriterContract
         'Z',
     ];
 
-    public function __construct($config, array $data)
+    public function __construct($config, $data)
     {
         $this->config       = $config;
         $this->data         = $data;
@@ -57,6 +59,31 @@ class ExcelWriter implements WriterContract
         return $this->buildTableHeader()
                     ->buildTable()
                     ->save($path);
+    }
+
+    public function resourceToArray()
+    {
+        $data = [];
+        if (!empty($this->data)) {
+            try {
+                $reader = IOFactory::load($this->data);
+                $worksheet = $reader->getActiveSheet()->toArray();
+                $count = count($worksheet);
+                if ($count > 2) {
+                    $headerData = array_shift($worksheet);
+                    foreach ($worksheet as $rowKey => $rowArray) {
+                        foreach ($rowArray as $itemkey => $itemValue) {
+                            $data[$rowKey][$headerData[$itemkey]] = $itemValue;
+                        }
+                    }
+                } else {
+                    $data = $worksheet;
+                }
+            } catch (Exception $e) {
+                throw new Exception('File not found.');
+            }
+        }
+        return $data;
     }
 
     public function buildTableHeader()
