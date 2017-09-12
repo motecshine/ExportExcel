@@ -3,7 +3,6 @@
 namespace Irain\ExportExcel;
 
 use PhpOffice\PhpSpreadsheet\Settings;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use RuntimeException;
 
 class Export
@@ -14,8 +13,6 @@ class Export
     private $data;
 
     private $cacheDriver;
-
-    private $spreadsSheet;
 
     private $writer;
 
@@ -30,7 +27,6 @@ class Export
         if (!empty($config)) {
             $this->setConfig($config);
         }
-        $this->spreadsSheet = new Spreadsheet;
         $this->writer       = new Writer;
 
         if (!empty($this->config['cache_driver'])) {
@@ -109,12 +105,11 @@ class Export
         }
 
         $this->data = $data;
-
         return $this;
     }
 
     /**
-     * build and out stream
+     * Build and out stream
      *
      * @return mixed
      */
@@ -122,7 +117,6 @@ class Export
     {
         $this->writer->setConfig($this->config);
         $this->writer->setData($this->data);
-
         return $this->writer->buildAndOutStream();
     }
 
