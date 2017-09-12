@@ -63,27 +63,16 @@ class ExcelWriter implements WriterContract
 
     public function resourceToArray()
     {
-        $data = [];
         if (!empty($this->data)) {
             try {
                 $reader = IOFactory::load($this->data);
                 $worksheet = $reader->getActiveSheet()->toArray();
-                $count = count($worksheet);
-                if ($count > 2) {
-                    $headerData = array_shift($worksheet);
-                    foreach ($worksheet as $rowKey => $rowArray) {
-                        foreach ($rowArray as $itemkey => $itemValue) {
-                            $data[$rowKey][$headerData[$itemkey]] = $itemValue;
-                        }
-                    }
-                } else {
-                    $data = $worksheet;
-                }
+                $worksheet = array_shift($worksheet);
             } catch (Exception $e) {
                 throw new Exception('File not found.');
             }
         }
-        return $data;
+        return $worksheet;
     }
 
     public function buildTableHeader()
