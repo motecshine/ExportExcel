@@ -21,21 +21,21 @@ class Import
      * @param array $config
      *
      */
-     public function __construct($config)
-     {
-         if (!empty($config)) {
-             $this->setConfig($config);
-         }
-         $this->writer       = new Writer;
+        public function __construct($config)
+        {
+            if (!empty($config)) {
+                $this->setConfig($config);
+            }
+            $this->writer       = new Writer;
  
-         if (!empty($this->config['cache_driver'])) {
-             $this->cacheDriver  = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
-         }
+            if (!empty($this->config['cache_driver'])) {
+                $this->cacheDriver  = (new CacheDriver())->setCacheDriver($this->config['cache_driver']);
+            }
  
-         if (!empty($this->cacheDriver)) {
-             Settings::setCache(/** @scrutinizer ignore-type */$this->cacheDriver);
-         }
-     }
+            if (!empty($this->cacheDriver)) {
+                Settings::setCache(/** @scrutinizer ignore-type */$this->cacheDriver);
+            }
+        }
 
     /**
      * set config
@@ -95,9 +95,9 @@ class Import
      */
     public function resourceToArray()
     {
-         return  $this->writer
-             ->setConfig($this->config)
-             ->setResource($this->resource)
-             ->resourceToArray();
+            return  $this->writer
+                ->setConfig($this->config)
+                ->setResource($this->resource)
+                ->resourceToArray();
     }
 }

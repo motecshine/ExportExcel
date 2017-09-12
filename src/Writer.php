@@ -55,12 +55,12 @@ class Writer
      */
     public function setResource($resource)
     {
-         if (empty($resource)) {
-             throw new RuntimeException('Resouce file name can not empty.');
-         }
-         $this->data = $resource;
-         return $this;
-     }
+            if (empty($resource)) {
+                throw new RuntimeException('Resouce file name can not empty.');
+            }
+            $this->data = $resource;
+            return $this;
+        }
 
     /**
      * resource file to array
