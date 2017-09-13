@@ -67,12 +67,13 @@ class ExcelWriter implements WriterContract
             try {
                 $reader = IOFactory::load($this->data);
                 $worksheet = $reader->getActiveSheet()->toArray();
-                $worksheet = array_shift($worksheet);
+                array_shift($worksheet);
+                return $worksheet;
             } catch (Exception $e) {
                 throw new Exception('File not found.');
             }
         }
-        return $worksheet;
+        return false;
     }
 
     public function buildTableHeader()
