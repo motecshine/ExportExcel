@@ -21,8 +21,6 @@
         "mockery/mockery": "1.0.x-dev"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+        "psr-4": {"Irain\\": "src/"}
     }
 }
