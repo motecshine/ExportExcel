@@ -21,6 +21,6 @@
         "mockery/mockery": "1.0.x-dev"
     },
     "autoload": {
-        "psr-4": {"Irain\\": "src/"}
+        "psr-4": {"Irain\\ExportExcel": "src/"}
     }
 }
