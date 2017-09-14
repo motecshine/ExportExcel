@@ -10,5 +10,4 @@ dist: trusty
 sudo: false
 
 install: travis_retry composer install --no-interaction --prefer-source
-script: travis_retry composer dump-autoload --optimize
 script: vendor/bin/phpunit --verbose
