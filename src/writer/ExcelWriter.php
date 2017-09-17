@@ -68,7 +68,17 @@ class ExcelWriter implements WriterContract
                 $reader = IOFactory::load($this->data);
                 $worksheet = $reader->getActiveSheet()->toArray();
                 array_shift($worksheet);
-                return $worksheet;
+                $retval = [];
+                if (isset($this->config['table_header'])) {
+                    foreach ($worksheet as $dataKey => $data) {
+                        foreach ($data as $itemKey => $item) {
+                            $retval[$dataKey][$this->config['table_header'][$itemKey]] = $item;
+                        }
+                    }
+                } else {
+                    $retval = $worksheet;
+                }
+                return $retval;
             } catch (Exception $e) {
                 throw new Exception('File not found.');
             }
