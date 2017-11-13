@@ -67,12 +67,14 @@ class ExcelWriter implements WriterContract
             try {
                 $reader = IOFactory::load($this->data);
                 $worksheet = $reader->getActiveSheet()->toArray();
-                array_shift($worksheet);
+                $tableHeader = array_shift($worksheet);
                 $retval = [];
                 if (isset($this->config['table_header'])) {
                     foreach ($worksheet as $dataKey => $data) {
                         foreach ($data as $itemKey => $item) {
-                            $retval[$dataKey][$this->config['table_header'][$itemKey]] = $item;
+                            if(in_array($tableHeader[$itemKey], $this->config['table_header'])) {
+                                $retval[$dataKey][$tableHeader[$itemKey]] = $item;
+                            }
                         }
                     }
                 } else {
