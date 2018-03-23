@@ -48,7 +48,7 @@
 ```
 ## Import
 ```php
-    use Irain\ExportExcel\import;  
+    use Irain\ExportExcel\Import;  
     $importConfig = [
         'cache_driver' => [
             'name'   => 'redis',
